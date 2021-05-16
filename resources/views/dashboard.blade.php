@@ -1,11 +1,11 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.js" integrity="sha512-bAjB1exAvX02w2izu+Oy4J96kEr1WOkG6nRRlCtOSQ0XujDtmAstq5ytbeIxZKuT9G+KzBmNq5d23D6bkGo8Kg==" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css" integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css" integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA==" crossorigin="anonymous" /> -->
   <div class="content">
     <div class="container-fluid">
       <div class="container-tambah mb-4">
@@ -17,6 +17,19 @@
               </button>
               {{ session('success') }}
             </div>
+        @endif
+
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+          </div>
         @endif
 
         <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#signupModal">
@@ -43,14 +56,17 @@
                               <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="material-icons">add_circle</i></div>
                               </div>
-                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama Benda">
+                                <input type="text" class="form-control" id="nama  @error('nama') is-invalid @enderror" name="nama" placeholder="Masukkan Nama Benda">
                             </div>
-                            @error('nama')
-                              <div class="invalid-feedback">
-                                  {{ $message }}
-                              </div>
-                            @enderror
                           </div>
+                          @error('nama')
+                            <div class="alert alert-danger">
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <i class="material-icons">close</i>
+                              </button>
+                              {{ $message }}
+                            </div>
+                          @enderror
 
                         <div class="form-group">
                           <div class="input-group">
@@ -59,7 +75,7 @@
                             </div>
                             <div class="dropdown">
                               <button class="btn btn-primary dropdown-toggle" type="button" id="jenis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Masukkan Jenis Benda
+                                Masukkan Jenis Benda
                               <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="jenis">
@@ -70,12 +86,7 @@
                                 <li value="Gordyn"><a class="dropdown-item" href="#">Gordyn</a></li>
                               </ul>
                             </div>
-                            <input type="hidden" id="dropdownJenis" class="form-control @error('jenis') is-invalid @enderror" name="jenis">
-                            @error('jenis')
-                              <div class="invalid-feedback">
-                                  {{ $message }}
-                              </div>
-                            @enderror
+                            <input type="hidden" id="dropdownJenis" class="form-control" name="jenis">
                           </div>
                         </div>
 
@@ -182,123 +193,7 @@
 
       </div>
       <div class="row">
-        <!-- <div class="col-lg-6 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-tabs card-header-primary">
-              <div class="nav-tabs-navigation">
-                <div class="nav-tabs-wrapper">
-                  <span class="nav-tabs-title">Tasks:</span>
-                  <ul class="nav nav-tabs" data-tabs="tabs">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#profile" data-toggle="tab">
-                        <i class="material-icons">bug_report</i> Bugs
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#messages" data-toggle="tab">
-                        <i class="material-icons">code</i> Website
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#settings" data-toggle="tab">
-                        <i class="material-icons">cloud</i> Server
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active" id="profile">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tab-pane" id="messages">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tab-pane" id="settings">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
         <div class="col-lg-6 col-md-12">
           <div class="card">
             <div class="card-header card-header-warning">
@@ -320,7 +215,13 @@
                     <td>{{ $thing->thing }}</td>
                     <td>{{ $thing->room}}</td>
                     <td>
-                        <input 
+                    <div class="togglebutton">
+                      <label>
+                        <input type="checkbox" checked="">
+                          <span class="toggle"></span>
+                      </label>
+                    </div>
+                        <!-- <input 
                           type="checkbox" 
                           data-id="{{ $thing->id }}" 
                           class="toggle-class" 
@@ -329,9 +230,10 @@
                           data-offstyle="danger"
                           data-on="Hidup"
                           data-off="Mati"
+                          data-size="sm"
                           {{ $thing->state ? 'checked' : '' }}
-                        >
-                    </div>
+                        > -->
+                    <!-- </div> -->
                         <!-- <a href="/mahasiswa/{{ $thing->id }}/edit" class="btn btn-success btn-sm">Edit</a> -->
                         <!-- <div class="togglebutton">
                           <label>
@@ -374,7 +276,7 @@
 @endsection
 
 @push('js')
-  <s>
+  <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
@@ -383,10 +285,12 @@
     $(".dropdown-menu li a").click(function(){
       var selText = $(this).text();
       $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+      console.log('a1');
     });
 
     $('.dropdown-menu li').on('click', function(){
       $('#dropdownJenis').val($(this).attr("value"));
+      console.log('a2');
     });
 
     $(function() {
@@ -394,7 +298,7 @@
         var state = $(this).prop('checked') == true ? 1 : 0;
         var id = $(this).data('id');
           $.ajax({
-            type: "GET",
+            type: "get",
             dataType: "json",
             url: "/updateThing",
             data: {'state': state, 'id': id},
@@ -404,5 +308,5 @@
           });
       });
     });
-  </s>
+  </script>
 @endpush

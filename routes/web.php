@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
@@ -28,7 +29,7 @@ Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->
 Route::post('/home', 'App\Http\Controllers\HomeController@store');
 
 // Route::get('/updateThing', 'App\Http\Controllers\HomeController@updateThing');
-Route::get('/updateThing', [HomeController::class, 'updateThing'])->name('updateThing');
+// Route::get('/updateThing', [HomeController::class, 'updateThing'])->name('updateThing');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {
