@@ -62,10 +62,10 @@ class HomeController extends Controller
             ->with('success','Benda Berhasil Ditambahkan!');
     }
 
-    // public function updateThing(Request $request)
-    // {
-    //     $home = Home::find($request->id);
-    //     $home->state = $request->state;
-    //     $home->save();
-    // }
+    public function updateThing(Request $request)
+    {
+        $home = Home::find($request->id);
+        $home->state = $request->state;
+        $home->save();
+    }
 }

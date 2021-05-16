@@ -217,7 +217,18 @@
                     <td>
                     <div class="togglebutton">
                       <label>
-                        <input type="checkbox" checked="">
+                        <input 
+                          type="checkbox"
+                          data-id="{{ $thing->id }}" 
+                          class="toggle-class" 
+                          data-toggle="toggle"
+                          data-onstyle="success"
+                          data-offstyle="danger"
+                          data-on="Hidup"
+                          data-off="Mati"
+                          data-size="sm"
+                          {{ $thing->state ? 'checked' : '' }}
+                          >
                           <span class="toggle"></span>
                       </label>
                     </div>
