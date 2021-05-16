@@ -28,8 +28,9 @@ class HomeController extends Controller
         $home = Home::all();
         $totalLampu= Home::where('thingType', '<=', "Lampu")->get();
         $countTotalLampu = $totalLampu->count();
+        $notifikasiLampu = Home::orderBy('id', 'DESC')->limit(5)->get();
         // return view('dashboard', ['things' => $home]);
-        return view('dashboard', compact('home', 'countTotalLampu'));
+        return view('dashboard', compact('home', 'countTotalLampu', 'notifikasiLampu'));
     }
 
     public function store(Request $request)
@@ -42,10 +43,13 @@ class HomeController extends Controller
         // $mahasiswa->save();
         // return redirect('/');
 
+        $request->state = 0;
+
         // $request->validate([
-        //     'thing' => 'required',
+        //     'thing' => 'required|unique',
         //     'thingType' => 'required',
         //     'room' => 'required',
+        //     'state' => 'required'
         // ]);
 
         Home::create([

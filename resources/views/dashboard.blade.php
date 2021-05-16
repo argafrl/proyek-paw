@@ -37,6 +37,8 @@
           Tambah
         </button>
 
+        <!-- <h2>{{ $notifikasiLampu }}</h2> -->
+
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-signup" role="document">
             <div class="modal-content">
@@ -56,17 +58,9 @@
                               <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="material-icons">add_circle</i></div>
                               </div>
-                                <input type="text" class="form-control" id="nama  @error('nama') is-invalid @enderror" name="nama" placeholder="Masukkan Nama Benda">
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Benda">
                             </div>
                           </div>
-                          @error('nama')
-                            <div class="alert alert-danger">
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <i class="material-icons">close</i>
-                              </button>
-                              {{ $message }}
-                            </div>
-                          @enderror
 
                         <div class="form-group">
                           <div class="input-group">
@@ -95,12 +89,7 @@
                             <div class="input-group-prepend">
                               <div class="input-group-text"><i class="material-icons">place</i></div>
                             </div>
-                              <input type="text"class="form-control @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" placeholder="Masukkan Lokasi Benda" />
-                              @error('lokasi')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                              @enderror
+                              <input type="text"class="form-control" id="lokasi" name="lokasi" placeholder="Masukkan Lokasi Benda" />
                           </div>
                         </div>
 
