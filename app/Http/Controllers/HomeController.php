@@ -42,11 +42,11 @@ class HomeController extends Controller
         // $mahasiswa->save();
         // return redirect('/');
 
-        $request->validate([
-            'thing' => 'required',
-            'thingType' => 'required',
-            'room' => 'required',
-        ]);
+        // $request->validate([
+        //     'thing' => 'required',
+        //     'thingType' => 'required',
+        //     'room' => 'required',
+        // ]);
 
         Home::create([
             'thing' => $request->nama,
