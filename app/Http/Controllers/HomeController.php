@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Home;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -26,11 +28,17 @@ class HomeController extends Controller
     {
         // return view('dashboard');
         $home = Home::all();
-        $totalLampu= Home::where('thingType', '<=', "Lampu")->get();
+        $totalLampu= Home::where('thingType', 'LIKE', "Lampu")->get();
+        $totalTV= Home::where('thingType', 'LIKE', "TV")->get();
         $countTotalLampu = $totalLampu->count();
+        $countTotalTV = $totalTV->count();
         $notifikasiLampu = Home::orderBy('id', 'DESC')->limit(5)->get();
+
+        $responseKota = Http::get('https://ibnux.github.io/BMKG-importer/cuaca/wilayah.json');
+        $dataKota = $responseKota->json();
+        // dd($dataKota);
         // return view('dashboard', ['things' => $home]);
-        return view('dashboard', compact('home', 'countTotalLampu', 'notifikasiLampu'));
+        return view('dashboard', compact('totalLampu', 'dataKota', 'countTotalLampu', 'notifikasiLampu', 'countTotalTV'));
     }
 
     public function store(Request $request)
@@ -71,5 +79,18 @@ class HomeController extends Controller
         $home = Home::find($request->id);
         $home->state = $request->state;
         $home->save();
+    }
+
+    public function updateCuaca(Request $request)
+    {
+        $id = $request->id;
+        $responseCuaca = Http::get('https://ibnux.github.io/BMKG-importer/cuaca/' . $id . '.json');
+        // $responseCuaca = Http::get('https://ibnux.github.io/BMKG-importer/cuaca/wilayah.json');
+        $dataCuaca = $responseCuaca->json();
+        // dump($dataCuaca);
+        // return view('dashboard', compact('dataCuaca'));
+        // return Response::json($dataCuaca);
+        return response()->json($dataCuaca);
+        // return $dataCuaca;
     }
 }

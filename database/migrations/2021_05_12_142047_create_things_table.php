@@ -15,7 +15,6 @@ class CreateThingsTable extends Migration
     {
         Schema::create('things', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('thing')->unique();
             $table->string('thingType');
             $table->string('room');

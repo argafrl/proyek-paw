@@ -6,6 +6,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.js" integrity="sha512-bAjB1exAvX02w2izu+Oy4J96kEr1WOkG6nRRlCtOSQ0XujDtmAstq5ytbeIxZKuT9G+KzBmNq5d23D6bkGo8Kg==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css" integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA==" crossorigin="anonymous" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
   <div class="content">
     <div class="container-fluid">
       <div class="container-tambah mb-4">
@@ -37,8 +41,6 @@
           Tambah
         </button>
 
-        <!-- <h2>{{ $notifikasiLampu }}</h2> -->
-
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-signup" role="document">
             <div class="modal-content">
@@ -68,7 +70,7 @@
                               <div class="input-group-text"><i class="material-icons">format_list_bulleted</i></div>
                             </div>
                             <div class="dropdown">
-                              <button class="btn btn-primary dropdown-toggle" type="button" id="jenis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="jenis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Masukkan Jenis Benda
                               <span class="caret"></span>
                               </button>
@@ -93,11 +95,11 @@
                           </div>
                         </div>
 
+                        <div class="modal-footer justify-content-center">
+                          <!-- <a href="#pablo" class="btn btn-primary btn-round">Tambah benda</a> -->
+                          <button type="submit" class="btn btn-primary btn-round">Tambah benda</button>
                         </div>
-                      <div class="modal-footer justify-content-center">
-                      <!-- <a href="#pablo" class="btn btn-primary btn-round">Tambah benda</a> -->
-                      <button type="submit" class="btn btn-primary btn-round">Tambah benda</button>
-                      </div>
+                        </div
                     </form>
                 </div>
               </div>
@@ -105,6 +107,7 @@
           </div>
         </div>
       </div>
+      
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
@@ -151,7 +154,7 @@
                 <i class="material-icons">tv</i>
               </div>
               <p class="card-category">Jumlah TV</p>
-              <h3 class="card-title">null</h3>
+              <h3 class="card-title">{{ $countTotalTV }}</h3>
             </div>
             <div class="card-footer">
               <!-- <div class="stats">
@@ -161,7 +164,7 @@
           </div>
         </div>
 
-        <!-- @foreach( $home as $thing)
+        <!-- @foreach( $totalLampu as $thing)
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-info card-header-icon">
@@ -198,7 +201,7 @@
                   <th>Aksi</th>
                 </thead>
                 <tbody>
-                @foreach( $home as $thing)
+                @foreach( $totalLampu as $thing)
                   <tr>
                     <td>{{ $thing->id }}</td>
                     <td>{{ $thing->thing }}</td>
@@ -270,7 +273,28 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header card-header-text card-header-primary">
+              <div class="card-text">
+                <h4 class="card-title">Prakiraan Cuaca</h4>
+              </div>
+            </div>
+            <div class="card-body mt-2">
+              <select class="selectpicker mb-2" data-style="btn-primary" data-width="auto" id="cuacaId" data-live-search="true" title="Masukkan Nama Kota..." onchange="getCuaca();">
+                @foreach( $dataKota as $kota)
+                  <option value="{{ $kota['id'] }}">{{ $kota['kota'] }}</option>
+                @endforeach
+              </select>
+              <div class="current-weather flex items-center justify-between px-6 py-8">
+                <div class="d-flex flex-column align-items-start weather-flex">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
     </div>
   </div>
 @endsection
@@ -290,7 +314,8 @@
 
     $('.dropdown-menu li').on('click', function(){
       $('#dropdownJenis').val($(this).attr("value"));
-      console.log('a2');
+      // var a = document.getElementsByTagName()
+      // console.log('a2');
     });
 
     $(function() {
@@ -308,5 +333,56 @@
           });
       });
     });
+
+    $(function() {
+      $('.dropdown-menu').selectpicker();
+    });
+
+    function getCuaca(){
+      var cuacaId = document.getElementById("cuacaId").value;
+      // console.log(cuacaId);
+      $.ajax({
+            headers:{
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            method: "post",
+            url: "/updateCuaca",
+            data: {
+              'id': cuacaId
+            },
+            // success: function(data){
+            //   console.log(data.success);
+            // }
+            success: function(data){
+              // console.log(data);
+              var event_data = '';
+              $.each(data, function(index, value){
+                // var m = value.jamCuaca.moment().format('hh');
+                var d = moment(value.jamCuaca).format('LL')
+                var m = moment(value.jamCuaca).format('HH');
+                // console.log(m);
+                if(m === '12'){
+                  // console.log(m);
+                  event_data +=  '<div class="d-flex flex-row">';
+                  event_data +=  '<div>';
+                  
+                  event_data +=     '<h1 class="font-weight-bold">' + value.tempC + '°C</h1>';
+                  
+                  event_data +=   '</div>';
+                  event_data +=   '<div class="p-2 w-50">';
+                  event_data +=     '<span>' + d + '</span>';
+                  event_data +=     '<div class="font-weight-bold">' + value.cuaca + '</div>';
+                  // event_data +=     '<div>Jakarta</div>';
+                  event_data +=   '</div>';
+                  event_data +=   '</div>';
+                }
+                
+              });
+              $('.weather-flex').html("");
+              $('.weather-flex').append(event_data);
+            }
+          });
+    }
+    
   </script>
 @endpush
