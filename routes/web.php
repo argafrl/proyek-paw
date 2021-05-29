@@ -32,6 +32,12 @@ Route::get('/updateThing', 'App\Http\Controllers\HomeController@updateThing');
 Route::post('/updateCuaca', 'App\Http\Controllers\HomeController@updateCuaca');
 // Route::get('/updateThing', [HomeController::class, 'updateThing'])->name('updateThing');
 
+Route::get('/user', 'App\Http\Controllers\UserController@create');
+Route::post('/user', 'App\Http\Controllers\UserController@store');
+Route::get('/user/{user}/edit', 'App\Http\Controllers\UserController@edit');
+Route::delete('/user/{user}', 'App\Http\Controllers\UserController@destroy');
+Route::put('/user/{user}', 'App\Http\Controllers\UserController@update');
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {
 		return view('pages.table_list');

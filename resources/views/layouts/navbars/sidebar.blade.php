@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="https://creative-tim.com/" class="simple-text logo-normal">
+    <a href="/home" class="simple-text logo-normal" style="text-transform: capitalize;">
       {{ __('Smart Home') }}
     </a>
   </div>
@@ -66,12 +66,12 @@
             <p>{{ __('Maps') }}</p>
         </a>
       </li> -->
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
+      <!-- <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
           <i class="material-icons">notifications</i>
           <p>{{ __('Notifikasi') }}</p>
         </a>
-      </li>
+      </li> -->
       <!-- <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('language') }}">
           <i class="material-icons">language</i>

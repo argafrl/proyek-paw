@@ -30,15 +30,21 @@ class HomeController extends Controller
         $home = Home::all();
         $totalLampu= Home::where('thingType', 'LIKE', "Lampu")->get();
         $totalTV= Home::where('thingType', 'LIKE', "TV")->get();
+        $totalAC= Home::where('thingType', 'LIKE', "A/C")->get();
+        $totalKunci= Home::where('thingType', 'LIKE', "Kunci")->get();
+        $totalGordyn= Home::where('thingType', 'LIKE', "Gordyn")->get();
         $countTotalLampu = $totalLampu->count();
         $countTotalTV = $totalTV->count();
+        $countTotalAC = $totalAC->count();
+        $countTotalKunci = $totalKunci->count();
+        $countTotalGordyn = $totalGordyn->count();
         $notifikasiLampu = Home::orderBy('id', 'DESC')->limit(5)->get();
 
         $responseKota = Http::get('https://ibnux.github.io/BMKG-importer/cuaca/wilayah.json');
         $dataKota = $responseKota->json();
         // dd($dataKota);
         // return view('dashboard', ['things' => $home]);
-        return view('dashboard', compact('totalLampu', 'dataKota', 'countTotalLampu', 'notifikasiLampu', 'countTotalTV'));
+        return view('dashboard', compact('totalLampu', 'totalAC', 'totalTV', 'totalKunci', 'totalGordyn', 'dataKota', 'countTotalLampu', 'notifikasiLampu', 'countTotalTV', 'countTotalAC', 'countTotalKunci', 'countTotalGordyn'));
     }
 
     public function store(Request $request)

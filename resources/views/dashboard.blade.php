@@ -1,15 +1,13 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.js" integrity="sha512-bAjB1exAvX02w2izu+Oy4J96kEr1WOkG6nRRlCtOSQ0XujDtmAstq5ytbeIxZKuT9G+KzBmNq5d23D6bkGo8Kg==" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css" integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA==" crossorigin="anonymous" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <style>
+    .selectpicker option[selected]{
+    background-color: black;
+    }
+  </style>
   <div class="content">
     <div class="container-fluid">
       <div class="container-tambah mb-4">
@@ -36,25 +34,25 @@
           </div>
         @endif
 
-        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#signupModal">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#signupModal">
           <i class="material-icons">add</i>
           Tambah
         </button>
 
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-signup" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-signup" role="document">
             <div class="modal-content">
-              <div class="card card-signup card-plain w-100">
-                <div class="modal-header">
-                  <h5 class="modal-title card-title">Tambah Benda</h5>
+              <!-- <div class="card card-signup card-plain w-100"> -->
+                <div class="modal-header text-center">
+                  <h3 class="modal-title font-weight-bold text-center ml-3">Tambah Benda</h3>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <i class="material-icons">clear</i>
+                    <i class="material-icons">clear</i>
                   </button>
                 </div>
-                <div class="modal-body d-flex justify-content-center align-self-center w-100">                    
+                <div class="modal-body p-0 pt-3">                    
                       <form class="form" method="post" action="/home">
                         @csrf
-                        <div class="card-body pr-4" style="min-width: 400px;">
+                        <div class="mx-4">
                           <div class="form-group">
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -64,45 +62,48 @@
                             </div>
                           </div>
 
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text"><i class="material-icons">format_list_bulleted</i></div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="material-icons">format_list_bulleted</i></div>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="jenis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Masukkan Jenis Benda
+                                <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="jenis">
+                                  <li value="Lampu"><a class="dropdown-item" href="#">Lampu</a></li>
+                                  <li value="A/C"><a class="dropdown-item" href="#">A/C</a></li>
+                                  <li value="TV"><a class="dropdown-item" href="#">TV</a></li>
+                                  <li value="Kunci"><a class="dropdown-item" href="#">Kunci</a></li>
+                                  <li value="Gordyn"><a class="dropdown-item" href="#">Gordyn</a></li>
+                                </ul>
+                              </div>
+                              <input type="hidden" id="dropdownJenis" class="form-control" name="jenis">
                             </div>
-                            <div class="dropdown">
-                              <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="jenis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Masukkan Jenis Benda
-                              <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="jenis">
-                                <li value="Lampu"><a class="dropdown-item" href="#">Lampu</a></li>
-                                <li value="A/C"><a class="dropdown-item" href="#">A/C</a></li>
-                                <li value="TV"><a class="dropdown-item" href="#">TV</a></li>
-                                <li value="Kunci"><a class="dropdown-item" href="#">Kunci</a></li>
-                                <li value="Gordyn"><a class="dropdown-item" href="#">Gordyn</a></li>
-                              </ul>
-                            </div>
-                            <input type="hidden" id="dropdownJenis" class="form-control" name="jenis">
                           </div>
-                        </div>
 
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text"><i class="material-icons">place</i></div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="material-icons">place</i></div>
+                              </div>
+                                <input type="text"class="form-control" id="lokasi" name="lokasi" placeholder="Masukkan Lokasi Benda" />
                             </div>
-                              <input type="text"class="form-control" id="lokasi" name="lokasi" placeholder="Masukkan Lokasi Benda" />
-                          </div>
+                          </div>                    
                         </div>
-
-                        <div class="modal-footer justify-content-center">
-                          <!-- <a href="#pablo" class="btn btn-primary btn-round">Tambah benda</a> -->
-                          <button type="submit" class="btn btn-primary btn-round">Tambah benda</button>
-                        </div>
-                        </div
+                        <div class="modal-footer mt-4">
+                            <!-- <a href="#pablo" class="btn btn-primary btn-round">Tambah benda</a> -->
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Tambah benda</button>                
+                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                        
                     </form>
+                    
                 </div>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -121,13 +122,7 @@
               </h3>
             </div>
             <div class="card-footer">
-            <!-- <a href="#0" class="btn btn-primary">Tambah</a> -->
-              <!-- <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
-              </div> -->
-
-              
+             
             </div>
           </div>
         </div>
@@ -138,7 +133,9 @@
                 <i class="material-icons">ac_unit</i>
               </div>
               <p class="card-category">Jumlah A/C</p>
-              <h3 class="card-title">null</h3>
+              <h3 class="card-title">{{ $countTotalAC }}
+                <small>buah</small>
+              </h3>
             </div>
             <div class="card-footer">
               <!-- <div class="stats">
@@ -154,7 +151,9 @@
                 <i class="material-icons">tv</i>
               </div>
               <p class="card-category">Jumlah TV</p>
-              <h3 class="card-title">{{ $countTotalTV }}</h3>
+              <h3 class="card-title">{{ $countTotalTV }}
+                <small>buah</small>
+              </h3>
             </div>
             <div class="card-footer">
               <!-- <div class="stats">
@@ -164,38 +163,73 @@
           </div>
         </div>
 
-        <!-- @foreach( $totalLampu as $thing)
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-info card-header-icon">
               <div class="card-icon">
-                <i class="fa fa-twitter"></i>
+                <i class="material-icons">vpn_key</i>
               </div>
-              <p class="card-category">{{ $thing->thing }}</p>
-              <h3 class="card-title">{{ $thing->thingType }}</h3>
+              <p class="card-category">Jumlah Kunci</p>
+              <h3 class="card-title">{{ $countTotalKunci }}
+                <small>buah</small>
+              </h3>
             </div>
             <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
+              <!-- <div class="stats">
+                <i class="material-icons">date_range</i> Last 24 Hours
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <!-- <div class="card-text"> -->
+                <h4 class="card-title">Prakiraan Cuaca</h4>
+              <!-- </div> -->
+            </div>
+            <div class="card-body mt-2">
+              <select class="selectpicker mb-2" data-dropup-auto="false" data-style="btn-primary" data-width="auto" id="cuacaId" data-live-search="true" title="Masukkan Nama Kota..." onchange="getCuaca();">
+                @foreach( $dataKota as $kota)
+                  <option value="{{ $kota['id'] }}">{{ $kota['kota'] }}</option>
+                @endforeach
+              </select>
+              <div class="current-weather flex items-center justify-between px-6 py-8">
+                <div class="d-flex flex-column align-items-start weather-flex">
+                </div>
               </div>
             </div>
           </div>
         </div>
-        @endforeach -->
 
-      </div>
-      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <!-- <div class="card-text"> -->
+                <h4 class="card-title">Pemutar Musik</h4>
+              <!-- </div> -->
+            </div>
+            <div class="card-body mt-2">
+              <input type="file" id="file"></input>
+              <audio id="audio" controls autoplay></audio>
+            </div>
+          </div>
+        </div>
 
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-4 col-md-12">
           <div class="card">
             <div class="card-header card-header-warning">
-              <h4 class="card-title">Lampu</h4>
+              <h4 class="card-title">Kontrol Lampu</h4>
               <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
                 <thead class="text-warning">
-                  <th>ID</th>
                   <th>Nama</th>
                   <th>Ruangan</th>
                   <th>Aksi</th>
@@ -203,7 +237,6 @@
                 <tbody>
                 @foreach( $totalLampu as $thing)
                   <tr>
-                    <td>{{ $thing->id }}</td>
                     <td>{{ $thing->thing }}</td>
                     <td>{{ $thing->room}}</td>
                     <td>
@@ -224,8 +257,39 @@
                           <span class="toggle"></span>
                       </label>
                     </div>
-                        <!-- <input 
-                          type="checkbox" 
+                        
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+     
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-success">
+              <h4 class="card-title">Kontrol AC</h4>
+              <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-success">
+                  <th>Nama</th>
+                  <th>Ruangan</th>
+                  <th>Aksi</th>
+                </thead>
+                <tbody>
+                @foreach( $totalAC as $thing)
+                  <tr>
+                    <td>{{ $thing->thing }}</td>
+                    <td>{{ $thing->room}}</td>
+                    <td>
+                    <div class="togglebutton">
+                      <label>
+                        <input 
+                          type="checkbox"
                           data-id="{{ $thing->id }}" 
                           class="toggle-class" 
                           data-toggle="toggle"
@@ -235,36 +299,11 @@
                           data-off="Mati"
                           data-size="sm"
                           {{ $thing->state ? 'checked' : '' }}
-                        > -->
-                    <!-- </div> -->
-                        <!-- <a href="/mahasiswa/{{ $thing->id }}/edit" class="btn btn-success btn-sm">Edit</a> -->
-                        <!-- <div class="togglebutton">
-                          <label>
-                            <input type="checkbox" name="toggle" id="toggle" checked="">
-                              <span class="toggle"></span>
-                          </label>
-                        </div> -->
-                        <!-- <div>
-
-
-                          <livewire:toggle-button
-                                  :model="$thing"
-                                  field="state"
-                                  key="{{ $thing->id }}" />
-                        </div> -->
-
-                        <!-- @livewire('toggle-button',[
-                          'model' => $thing,
-                          'field' => 'state',
-                          'key'=> $thing->id
-                        ]) -->
-
-
-                          <!-- <form action="/mahasiswa/{{ $thing->id }}" method="post" class="d-inline">
-                              @method('delete')
-                              @csrf
-                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form> -->
+                          >
+                          <span class="toggle"></span>
+                      </label>
+                    </div>
+                        
                     </td>
                   </tr>
                 @endforeach
@@ -274,33 +313,122 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-12">
           <div class="card">
-            <div class="card-header card-header-text card-header-primary">
-              <div class="card-text">
-                <h4 class="card-title">Prakiraan Cuaca</h4>
-              </div>
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Kontrol TV</h4>
+              <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
             </div>
-            <div class="card-body mt-2">
-              <select class="selectpicker mb-2" data-style="btn-primary" data-width="auto" id="cuacaId" data-live-search="true" title="Masukkan Nama Kota..." onchange="getCuaca();">
-                @foreach( $dataKota as $kota)
-                  <option value="{{ $kota['id'] }}">{{ $kota['kota'] }}</option>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-danger">
+                  <th>Nama</th>
+                  <th>Ruangan</th>
+                  <th>Aksi</th>
+                </thead>
+                <tbody>
+                @foreach( $totalTV as $thing)
+                  <tr>
+                    <td>{{ $thing->thing }}</td>
+                    <td>{{ $thing->room}}</td>
+                    <td>
+                    <div class="togglebutton">
+                      <label>
+                        <input 
+                          type="checkbox"
+                          data-id="{{ $thing->id }}" 
+                          class="toggle-class" 
+                          data-toggle="toggle"
+                          data-onstyle="success"
+                          data-offstyle="danger"
+                          data-on="Hidup"
+                          data-off="Mati"
+                          data-size="sm"
+                          {{ $thing->state ? 'checked' : '' }}
+                          >
+                          <span class="toggle"></span>
+                      </label>
+                    </div>
+                        
+                    </td>
+                  </tr>
                 @endforeach
-              </select>
-              <div class="current-weather flex items-center justify-between px-6 py-8">
-                <div class="d-flex flex-column align-items-start weather-flex">
-                </div>
-              </div>
+                </tbody>
+              </table>
             </div>
           </div>
-
         </div>
+
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+            <div class="card-header card-header-info">
+              <h4 class="card-title">Kontrol Kunci</h4>
+              <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table table-hover">
+                <thead class="text-info">
+                  <th>Nama</th>
+                  <th>Ruangan</th>
+                  <th>Aksi</th>
+                </thead>
+                <tbody>
+                @foreach( $totalKunci as $thing)
+                  <tr>
+                    <td>{{ $thing->thing }}</td>
+                    <td>{{ $thing->room}}</td>
+                    <td>
+                    <div class="togglebutton">
+                      <label>
+                        <input 
+                          type="checkbox"
+                          data-id="{{ $thing->id }}" 
+                          class="toggle-class" 
+                          data-toggle="toggle"
+                          data-onstyle="success"
+                          data-offstyle="danger"
+                          data-on="Hidup"
+                          data-off="Mati"
+                          data-size="sm"
+                          {{ $thing->state ? 'checked' : '' }}
+                          >
+                          <span class="toggle"></span>
+                      </label>
+                    </div>
+                        
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 @endsection
 
 @push('js')
   <script>
+
+    // Check for BlobURL support
+      var blob = window.URL || window.webkitURL;
+
+      document.getElementById('file').addEventListener('change', function(event){
+
+              // consolePrint('change on input#file triggered');
+              var file = this.files[0],
+              fileURL = blob.createObjectURL(file);
+              console.log(file);
+              console.log('File name: '+file.name);
+              console.log('File type: '+file.type);
+              console.log('File BlobURL: '+ fileURL);
+              document.getElementById('audio').src = fileURL;
+
+      });
+
+
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
