@@ -3,6 +3,7 @@
 @section('content')
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
   <style>
     .selectpicker option[selected]{
     background-color: black;
@@ -77,7 +78,6 @@
                                   <li value="A/C"><a class="dropdown-item" href="#">A/C</a></li>
                                   <li value="TV"><a class="dropdown-item" href="#">TV</a></li>
                                   <li value="Kunci"><a class="dropdown-item" href="#">Kunci</a></li>
-                                  <li value="Gordyn"><a class="dropdown-item" href="#">Gordyn</a></li>
                                 </ul>
                               </div>
                               <input type="hidden" id="dropdownJenis" class="form-control" name="jenis">
@@ -98,12 +98,9 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Tambah benda</button>                
                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                    </div>
-                        
-                    </form>
-                    
+                      </div>
+                    </form>            
                 </div>
-              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -185,27 +182,8 @@
       </div>
 
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <!-- <div class="card-text"> -->
-                <h4 class="card-title">Prakiraan Cuaca</h4>
-              <!-- </div> -->
-            </div>
-            <div class="card-body mt-2">
-              <select class="selectpicker mb-2" data-dropup-auto="false" data-style="btn-primary" data-width="auto" id="cuacaId" data-live-search="true" title="Masukkan Nama Kota..." onchange="getCuaca();">
-                @foreach( $dataKota as $kota)
-                  <option value="{{ $kota['id'] }}">{{ $kota['kota'] }}</option>
-                @endforeach
-              </select>
-              <div class="current-weather flex items-center justify-between px-6 py-8">
-                <div class="d-flex flex-column align-items-start weather-flex">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="row" data-masonry='{"percentPosition": true }'>
+        
 
         <div class="col-md-4">
           <div class="card">
@@ -401,6 +379,27 @@
                 @endforeach
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <!-- <div class="card-text"> -->
+                <h4 class="card-title">Prakiraan Cuaca</h4>
+              <!-- </div> -->
+            </div>
+            <div class="card-body mt-2">
+              <select class="selectpicker mb-2" data-dropup-auto="false" data-style="btn-primary" data-width="auto" id="cuacaId" data-live-search="true" title="Masukkan Nama Kota..." onchange="getCuaca();">
+                @foreach( $dataKota as $kota)
+                  <option value="{{ $kota['id'] }}">{{ $kota['kota'] }}</option>
+                @endforeach
+              </select>
+              <div class="current-weather flex items-center justify-between px-6 py-8">
+                <div class="d-flex flex-column align-items-start weather-flex">
+                </div>
+              </div>
             </div>
           </div>
         </div>
